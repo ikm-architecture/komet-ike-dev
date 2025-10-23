@@ -171,11 +171,11 @@ public class ConceptPatternNavController {
                 ObservableList<Object> patternChildren = FXCollections.observableArrayList();
                 AtomicInteger childCount = new AtomicInteger();
                 // populate the collection of instance for each pattern
-                PrimitiveData.get().forEachSemanticNidOfPattern(patternNid, semanticNid -> {
+                viewProperties.calculator().stampCalculator().forEachSemanticVersionOfPattern(patternNid, ((semanticEntityVersion, _) -> {
                     if (childCount.incrementAndGet() < maxChildrenInPatternViewer) {
-                        patternChildren.add(semanticNid);
+                        patternChildren.add(semanticEntityVersion.entity().nid());
                     }
-                });
+                }));
 
                 if (childCount.get() >= maxChildrenInPatternViewer) {
                     NumberFormat numberFormat = NumberFormat.getInstance();
